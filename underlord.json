@@ -1,0 +1,794 @@
+{
+    "alliances": [
+        {
+            "name": "Assassin",
+            "level": 3,
+            "total": 6,
+            "effect": "All Assassins gain a [ 15 / 25 ]% chance to Critical Hit for [ 300 / 400 ]% Damage. On a crit, the target is WOUNDED and healing taken is reduced by [ 50 / 100 ]% for 3 seconds."
+        },
+        {
+            "name": "Blood-Bound",
+            "level": 2,
+            "total": 2,
+            "effect": "When a Blood-Bound unit dies, it gives +125% Attack Damage, in addition to any existing Blood-Bonus it has, to a random friendly Blood-Bound unit."
+        },
+        {
+            "name": "Brawny",
+            "level": 2,
+            "total": 4,
+            "effect": "All Brawny units gain +[ 15 / 30 ] maximum HP for each kill by any of your team Brawny units through the game."
+        },
+        {
+            "name": "Brute",
+            "level": 2,
+            "total": 4,
+            "effect": "Whenever a Brute attacks an enemy it applies a -[ 30 / 70 ]% damage debuff for 3 seconds. When the debuff is initially applied it deals [ 80 / 150 ] damage. Brutes prefer to attack enemies that do not have the debuff."
+        },
+        {
+            "name": "Champion",
+            "level": 1,
+            "total": 1,
+            "effect": "Champions recive all Alliance bonuses. In addition, they gain 8% extra damage and 8% max health per active Alliance."
+        },
+        {
+            "name": "Deadeye",
+            "level": 2,
+            "total": 2,
+            "effect": "All Deadeye units focus their attacks on the lowest-health enemy. Melee Deadeye units gain phasing movements."
+        },
+        {
+            "name": "Demon",
+            "level": 1,
+            "total": 1,
+            "effect": "Whenever a Demon casts a spell, for each 4 seconds, allied Demons are silenced and the caster gains +50% bonus Pure damage for each allied Demon."
+        },
+        {
+            "name": "Dragon",
+            "level": 2,
+            "total": 2,
+            "effect": "All Drangon units unlock an additional draconic ability."
+        },
+        {
+            "name": "Druid",
+            "level": 2,
+            "total": 4,
+            "effect": "At the beginning of combat, [ 1 / 2 ] lowest star ally druids are upgraded a level."
+        },
+        {
+            "name": "Elusive",
+            "level": 3,
+            "total": 6,
+            "effect": "All Elusive units have a [ 10 / 20 ]% chance to gain +100% Evasion and +35 Attack Speed for 3 seconds when attacked."
+        },
+        {
+            "name": "Healer",
+            "level": 3,
+            "total": 3,
+            "effect": "All friendly healing is amplified by 30%."
+        },
+        {
+            "name": "Heartless",
+            "level": 2,
+            "total": 6,
+            "effect": "All enemies lose [ 3 / 8 / 15 ] Armor."
+        },
+        {
+            "name": "Human",
+            "level": 2,
+            "total": 6,
+            "effect": "Allies generate [ 4 / 7 / 10 ] mana per second."
+        },
+        {
+            "name": "Hunter",
+            "level": 3,
+            "total": 6,
+            "effect": "All Hunters have a [ 25 / 40 ]% chance of quickly performing [ 2 / 2 ] attacks."
+        },
+        {
+            "name": "Insect",
+            "level": 3,
+            "total": 3,
+            "effect": "Spiderlings constantly swarm enemies form the edge of the board. They are untargetable units that deal low damage and have 1 health. Enemies bitten by them have a 30% chance to miss attacks for 0.5s. Spiderlings replenish on death to a maximum of 12."
+        },
+        {
+            "name": "Inventor",
+            "level": 2,
+            "total": 4,
+            "effect": "Allied Inventors explode on death dealing [ 10 / 20 ]% of their Max Health to all enimies 1 cell away."
+        },
+        {
+            "name": "Knight",
+            "level": 2,
+            "total": 6,
+            "effect": "Knight units take [ 15 / 20 / 25]% less physical and magical damage. If attacked from the front, and within 1 cell of an allied Knight, Knight units take an additional [ 15 / 20 / 25 ]% less physical and magical damage."
+        },
+        {
+            "name": "Mage",
+            "level": 3,
+            "total": 6,
+            "effect": "Enemies take [ 25 / 75 ]% more Magic damage."
+        },
+        {
+            "name": "Primordial",
+            "level": 2,
+            "total": 6,
+            "effect": "Allied Primordial spawn a rank [ 1 / 2 / 3 ] Eidolon on death. Eidolons are ranged Primordial units that don't spawn Eidolons."
+        },
+        {
+            "name": "Savage",
+            "level": 2,
+            "total": 6,
+            "effect": "Allied Savage units gain +[ 4 / 7 / 15 ] Attack Damage each time they land an attack on an enemy or cast a damaging spell."
+        },
+        {
+            "name": "Scaled",
+            "level": 2,
+            "total": 4,
+            "effect": "Allies gain +[ 20 / 45 ]% Magic Resistance."
+        },
+        {
+            "name": "Scrappy",
+            "level": 2,
+            "total": 6,
+            "effect": "[ A Random Scrappy / All Scrappy Units / All Allies ] are granted +9 Armour and +8 HP Regeneration. Armor and HP are doubled whenever you have fewer units alive than your opponent does."
+        },
+        {
+            "name": "Shaman",
+            "level": 2,
+            "total": 4,
+            "effect": "Units attacking a Shaman have a 17% chanec of being turned into a chicken and hop [ 2 / 4 ] cells in a random direction. Each shaman can only turn each enemy into a chicken onec per battle."
+        },
+        {
+            "name": "Spirit",
+            "level": 3,
+            "total": 3,
+            "effect": "When a Spirit casts an ability they enter a charged state. When 3 Spirits are in a chared state they perform the forbidden technique of the triangular Delta Slam, each dealing 200 magic damage to all enemies cought inside and applying their elemental effects."
+        },
+        {
+            "name": "Troll",
+            "level": 2,
+            "total": 4,
+            "effect": "All Troll units gain +[ 35 / 65 ] Attack Speed and other Allies gain +[ 10 / 30 ] Attack Speed."
+        },
+        {
+            "name": "Warlock",
+            "level": 2,
+            "total": 6,
+            "effect": "Whenever a Warlock casts a spell, they form a link with the Ally who has the lowest health for [ 2 / 3 / 3.5 ] seconds. When either linked hero deals damage, both units are healed [ 50 / 70 / 90 ]% of the damage dealt."
+        },
+        {
+            "name": "Warrior",
+            "level": 3,
+            "total": 6,
+            "effect": "All Warriors gain +[ 7 / 17 ] Armor."
+        }
+    ],
+    "heroes": [
+        {
+            "name": "Anti-Mage",
+            "tier": 1,
+            "alliances": ["Elusive", "Assassin"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Axe",
+            "tier": 1,
+            "alliances": ["Brawny", "Brute"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Batrider",
+            "tier": 1,
+            "alliances": ["Troll", "Knight"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Bloodseeker",
+            "tier": 1,
+            "alliances": ["Blood-Bound", "Deadeye"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Bounty Hunter",
+            "tier": 1,
+            "alliances": ["Scrappy", "Assassin"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Drow Ranger",
+            "tier": 1,
+            "alliances": ["Heartless", "Hunter"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Enchantress",
+            "tier": 1,
+            "alliances": ["Savage", "Druid", "Healer"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Nyx Assassin",
+            "tier": 1,
+            "alliances": ["Insect", "Assassin"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Ogre Magi",
+            "tier": 1,
+            "alliances": ["Blood-Bound", "Brute", "Mage"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Razor",
+            "tier": 1,
+            "alliances": ["Primordial", "Mage"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Shadow Demon",
+            "tier": 1,
+            "alliances": ["Heartless", "Demon"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Shadow Shaman",
+            "tier": 1,
+            "alliances": ["Troll", "Shaman"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Snapfire",
+            "tier": 1,
+            "alliances": ["Dragon", "Inventor"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Tiny",
+            "tier": 1,
+            "alliances": ["Primordial", "Warrior"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Tusk",
+            "tier": 1,
+            "alliances": ["Savage", "Warrior"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Venomancer",
+            "tier": 1,
+            "alliances": ["Savage", "Warlock", "Scaled"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Warlock",
+            "tier": 1,
+            "alliances": ["Blood-Bound", "Warlock", "Healer"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Beastmaster",
+            "tier": 2,
+            "alliances": ["Brawny", "Hunter"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Chaos Knight",
+            "tier": 2,
+            "alliances": ["Demon", "Knight"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Crystal Maiden",
+            "tier": 2,
+            "alliances": ["Human", "Mage"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Dazzle",
+            "tier": 2,
+            "alliances": ["Troll", "Healer"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Ember Spirit",
+            "tier": 2,
+            "alliances": ["Spirit", "Assassin"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Luna",
+            "tier": 2,
+            "alliances": ["Elusive", "Knight"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Magnus",
+            "tier": 2,
+            "alliances": ["Shaman", "Brute"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Nature's Prophet",
+            "tier": 2,
+            "alliances": ["Druid", "Shaman"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Puck",
+            "tier": 2,
+            "alliances": ["Elusive", "Dragon", "Mage"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Pudge",
+            "tier": 2,
+            "alliances": ["Heartless", "Warrior"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Queen of Pain",
+            "tier": 2,
+            "alliances": ["Demon", "Assassin"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Slardar",
+            "tier": 2,
+            "alliances": ["Scaled", "Warrior"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Storm Spirit",
+            "tier": 2,
+            "alliances": ["Spirit", "Mage"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Timbersaw",
+            "tier": 2,
+            "alliances": ["Scrappy", "Inventor"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Weaver",
+            "tier": 2,
+            "alliances": ["Insect", "Elusive", "Scrappy"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Windranger",
+            "tier": 2,
+            "alliances": ["Elusive", "Hunter"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Witch Doctor",
+            "tier": 2,
+            "alliances": ["Troll", "Warlock"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Abaddon",
+            "tier": 3,
+            "alliances": ["Heartless", "Knight"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Clockwork",
+            "tier": 3,
+            "alliances": ["Scrappy", "Inventor"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Earth Spirit",
+            "tier": 3,
+            "alliances": ["Spirit", "Warrior"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "IO",
+            "tier": 3,
+            "alliances": ["Primordial", "Druid"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Juggernaut",
+            "tier": 3,
+            "alliances": ["Brawny", "Warrior"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Legion Commander",
+            "tier": 3,
+            "alliances": ["Human", "Champion"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Lifestealer",
+            "tier": 3,
+            "alliances": ["Heartless", "Brute"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Lina",
+            "tier": 3,
+            "alliances": ["Human", "Mage"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Lycan",
+            "tier": 3,
+            "alliances": ["Human", "Savage", "Hunter"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Morphling",
+            "tier": 3,
+            "alliances": ["Primordial", "Mage"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Omniknight",
+            "tier": 3,
+            "alliances": ["Human", "Knight", "Healer"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Phantom Assassin",
+            "tier": 3,
+            "alliances": ["Elusive", "Assassin"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Shadow Fiend",
+            "tier": 3,
+            "alliances": ["Demon", "Warlock"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Slark",
+            "tier": 3,
+            "alliances": ["Scaled", "Assassin"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Sniper",
+            "tier": 3,
+            "alliances": ["Scrappy", "Deadeye", "Hunter"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Terrorblade",
+            "tier": 3,
+            "alliances": ["Demon", "Hunter"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Tinker",
+            "tier": 3,
+            "alliances": ["Scrappy", "Inventor"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Treant Protector",
+            "tier": 3,
+            "alliances": ["Druid", "Brute"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Viper",
+            "tier": 3,
+            "alliances": ["Scaled", "Dragon"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Alchemist",
+            "tier": 4,
+            "alliances": ["Scrappy", "Warlock"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Arc Warden",
+            "tier": 4,
+            "alliances": ["Primordial", "Shaman"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Bristleback",
+            "tier": 4,
+            "alliances": ["Brawny", "Savage"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Broodmother",
+            "tier": 4,
+            "alliances": ["Insect", "Warlock"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Doom",
+            "tier": 4,
+            "alliances": ["Demon", "Brute"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Dragon Knight",
+            "tier": 4,
+            "alliances": ["Human", "Dragon", "Knight"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Keeper of the Light",
+            "tier": 4,
+            "alliances": ["Human", "Mage"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Kunkka",
+            "tier": 4,
+            "alliances": ["Human", "Warrior"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Lone Druid",
+            "tier": 4,
+            "alliances": ["Savage", "Druid"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Mirana",
+            "tier": 4,
+            "alliances": ["Elusive", "Hunter"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Necrophos",
+            "tier": 4,
+            "alliances": ["Heartless", "Healer"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Sand King",
+            "tier": 4,
+            "alliances": ["Savage", "Insect"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Templar Assassin",
+            "tier": 4,
+            "alliances": ["Elusive", "Assassin"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Tidehunter",
+            "tier": 4,
+            "alliances": ["Scaled", "Warrior"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Disruptor",
+            "tier": 5,
+            "ace": "Warlock",
+            "alliances": ["Brawny", "Warlock"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Enigma",
+            "tier": 5,
+            "ace": "Primordial",
+            "alliances": ["Primordial", "Shaman"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Faceless Void",
+            "tier": 5,
+            "ace": "Assassin",
+            "alliances": ["Primordial", "Assassin"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Gyrocopter",
+            "tier": 5,
+            "ace": "Deadeye",
+            "alliances": ["Deadeye", "Inventor"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Lich",
+            "tier": 5,
+            "ace": "Mage",
+            "alliances": ["Heartless", "Mage"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Medusa",
+            "tier": 5,
+            "ace": "Hunter",
+            "alliances": ["Scaled", "Hunter"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Sven",
+            "tier": 5,
+            "ace": "Knight",
+            "alliances": ["Human", "Scaled", "Knight"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Techies",
+            "tier": 5,
+            "ace": "Inventor",
+            "alliances": ["Scrappy", "Inventor"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Troll Warlord",
+            "tier": 5,
+            "ace": "Troll",
+            "alliances": ["Troll", "Warrior"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        },
+        {
+            "name": "Void Spirit",
+            "tier": 5,
+            "ace": "Spirit",
+            "alliances": ["Spirit", "Warlock"],
+            "abilities": [],
+            "description": "",
+            "stats": []
+        }
+    ]
+}
