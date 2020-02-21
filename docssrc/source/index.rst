@@ -1,5 +1,5 @@
 Welcome to dota_underlords's documentation!
-=======================================
+===========================================
 
 .. toctree::
    :maxdepth: 2

@@ -1,14 +1,27 @@
 from __future__ import annotations
 
-from typing import List, Tuple, Set, Iterator, TypeVar, Optional, Callable, Any, Dict, Union, Iterable, cast
+import cmd
+import collections
+import copy
+import dataclasses
 import itertools
 import json
-import copy
-import collections
-import cmd
+from typing import (
+    Any,
+    Callable,
+    Dict,
+    Iterable,
+    Iterator,
+    List,
+    Optional,
+    Set,
+    Tuple,
+    TypeVar,
+    Union,
+    cast,
+)
 
-from mm_json.public.dataclasses_json import dataclass_json, Converter
-import dataclasses
+from mm_json.public.dataclasses_json import Converter, dataclass_json
 
 converter = Converter()
 
@@ -24,14 +37,17 @@ class Alliance:
 
     def __hash__(self):
         return hash(self.name)
-    
+
     def __str__(self):
         return (
-            f'{self.name} (' + '/'.join(map(str, self.sizes)) + ')'
-            + '\n  ' + self.effect
-            + '\n  Heroes:'
-            + ''.join(
-                f'\n    {hero.name}({hero.tier})'
+            f"{self.name} ("
+            + "/".join(map(str, self.sizes))
+            + ")"
+            + "\n  "
+            + self.effect
+            + "\n  Heroes:"
+            + "".join(
+                f"\n    {hero.name}({hero.tier})"
                 for hero in sorted(self.heroes, key=hero_sort)
             )
         )
@@ -71,19 +87,18 @@ class Hero:
         return hash(self.name)
 
     def __str__(self):
-        return (
-            f'{self.name}({self.tier})\n'
-            f'  Alliances:'
-            + ''.join(
-                '\n    '
-                + ('\b\b* ' if self.ace == alliance else '')
-                + alliance.name + ' (' + '/'.join(map(str, alliance.sizes)) + ')'
-                for alliance in self.alliances
-            )
+        return f"{self.name}({self.tier})\n" f"  Alliances:" + "".join(
+            "\n    "
+            + ("\b\b* " if self.ace == alliance else "")
+            + alliance.name
+            + " ("
+            + "/".join(map(str, alliance.sizes))
+            + ")"
+            for alliance in self.alliances
         )
 
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 def iter_or(iter: Iterator[T], default: T) -> Iterator[T]:
@@ -99,6 +114,7 @@ def iter_or(iter: Iterator[T], default: T) -> Iterator[T]:
 def team_add(amount: int):
     def inner(team: Team, alliance: Alliance) -> Team:
         return team.add(alliance, amount)
+
     return inner
 
 
@@ -119,84 +135,73 @@ def hero_sort(hero: Hero) -> Tuple[int, str]:
 
 
 def _str_heroes(heroes: Union[Iterator[Hero], Iterable[Hero]]) -> str:
-    return ', '.join(
-        f'{h.name}({h.tier})'
-        for h in sorted(heroes, key=hero_sort)
-    )
+    return ", ".join(f"{h.name}({h.tier})" for h in sorted(heroes, key=hero_sort))
+
 
 class TeamAlliance:
     alliance: Alliance
     level: int
     tas: TeamAlliances
 
-    def __init__(
-        self,
-        alliance: Alliance,
-        level: int,
-        tas: TeamAlliances,
-    ) -> None:
+    def __init__(self, alliance: Alliance, level: int, tas: TeamAlliances,) -> None:
         self.alliance = alliance
         self.level = level
         self.tas = tas
 
     def __str__(self) -> str:
         return (
-            f'  {self.alliance.name} {self.level}'
-            f'\n    Team, {self.t_size}'
-            f' of {_str_heroes(self.t_heroes)}'
-            f'\n    Mixed, {self.m_size}'
-            f' of {_str_heroes(self.m_heroes)}'
-            f'\n    Alliance, {self.a_size}'
-            f' of {_str_heroes(self.a_heroes)}'
+            f"  {self.alliance.name} {self.level}"
+            f"\n    Team, {self.t_size}"
+            f" of {_str_heroes(self.t_heroes)}"
+            f"\n    Mixed, {self.m_size}"
+            f" of {_str_heroes(self.m_heroes)}"
+            f"\n    Alliance, {self.a_size}"
+            f" of {_str_heroes(self.a_heroes)}"
         )
-    
+
     @classmethod
     def from_empty(cls, alliance: Alliance, tas: TeamAlliances) -> TeamAlliance:
         return cls(alliance, 0, tas)
 
     def copy(self, tas: TeamAlliances) -> TeamAlliance:
-        return type(self)(
-            self.alliance,
-            self.level,
-            tas
-        )
-    
+        return type(self)(self.alliance, self.level, tas)
+
     @property
     def p_size(self) -> int:
         return min(self.alliance.level * self.level, len(self.p_heroes))
-    
+
     @property
     def t_size(self) -> int:
         return min(self.alliance.level * self.level, len(self.t_heroes))
-    
+
     @property
     def m_size(self) -> int:
         return self.p_size - self.t_size
-    
+
     @property
     def a_size(self) -> int:
         return self.alliance.level * self.level - self.p_size
-    
+
     @property
     def total_size(self) -> int:
         return self.alliance.level * self.level
-    
+
     @property
     def p_heroes(self) -> Set[Hero]:
         return self.alliance.heroes & self.tas.pool
-    
+
     @property
     def t_heroes(self) -> Set[Hero]:
         return self.alliance.heroes & self.tas.team
-    
+
     @property
     def m_heroes(self) -> Set[Hero]:
         return self.alliance.heroes & self.tas.mixed
-    
+
     @property
     def a_heroes(self) -> Set[Hero]:
         return self.alliance.heroes - self.tas.pool
-    
+
     def level_up_amount(self, level: int, t_size: int):
         n_size = level * self.alliance.level
         return max(0, n_size - len(self.p_heroes) - t_size)
@@ -210,12 +215,12 @@ class TeamAlliances(Dict[Alliance, TeamAlliance]):
         super().__init__()
         self.team = team
         self.mixed = mixed
-    
+
     def __str__(self) -> str:
         return (
-            f'  Team({len(self.team)}): {_str_heroes(self.team)}\n'
-            f'  Mixed({len(self.mixed)}): {_str_heroes(self.mixed)}\n'
-            + '\n'.join(str(ta) for ta in self.values())
+            f"  Team({len(self.team)}): {_str_heroes(self.team)}\n"
+            f"  Mixed({len(self.mixed)}): {_str_heroes(self.mixed)}\n"
+            + "\n".join(str(ta) for ta in self.values())
         )
 
     def __eq__(self, other: Any) -> bool:
@@ -231,26 +236,24 @@ class TeamAlliances(Dict[Alliance, TeamAlliance]):
         ret = TeamAlliance.from_empty(alliance, self)
         self[alliance] = ret
         return ret
-    
+
     def copy(self) -> TeamAlliances:
-        new = type(self)(
-            team=set(self.team),
-            mixed=set(self.mixed),
-        )
+        new = type(self)(team=set(self.team), mixed=set(self.mixed),)
         for key, value in self.items():
             new[key] = value.copy(new)
         return new
-    
+
     def set(self, alliance: Alliance, level: int) -> None:
         self[alliance] = TeamAlliance(alliance, level, self)
-    
+
     @property
     def size(self) -> int:
-        return len(self.team) + len(self.mixed) + sum(
-            max(0, ta.a_size)
-            for ta in self.values()
+        return (
+            len(self.team)
+            + len(self.mixed)
+            + sum(max(0, ta.a_size) for ta in self.values())
         )
-    
+
     @property
     def pool(self) -> Set[Hero]:
         return self.team | self.mixed
@@ -267,10 +270,7 @@ class Team:
         self.limit = limit
 
     def __str__(self) -> str:
-        return (
-            f'Team({self.size},{self.alliances.size}):\n'
-            + str(self.alliances)
-        )
+        return f"Team({self.size},{self.alliances.size}):\n" + str(self.alliances)
 
     def __eq__(self, other: Any) -> bool:
         if not isinstance(other, Team):
@@ -294,10 +294,14 @@ class Team:
         for ta in self.alliances.values():
             if len(ta.a_heroes) < ta.a_size:
                 self.alliances = prev_tas
-                raise ValueError(f'Not enough alliance heroes for alliance {ta.alliance.name}. Need {ta.a_size}, but only {", ".join(h.name for h in ta.a_heroes)} available.')
+                raise ValueError(
+                    f'Not enough alliance heroes for alliance {ta.alliance.name}. Need {ta.a_size}, but only {", ".join(h.name for h in ta.a_heroes)} available.'
+                )
             if len(ta.m_heroes) < ta.m_size:
                 self.alliances = prev_tas
-                raise ValueError(f'Not enough mixed heroes for alliance {ta.alliance.name}. Need {ta.m_size}, but only {", ".join(h.name for h in ta.m_heroes)} available.')
+                raise ValueError(
+                    f'Not enough mixed heroes for alliance {ta.alliance.name}. Need {ta.m_size}, but only {", ".join(h.name for h in ta.m_heroes)} available.'
+                )
 
     def _post_add_mixed(self) -> None:
         team: Set[Hero] = set()
@@ -331,13 +335,14 @@ class Team:
         self._post_add_team()
         self._post_add_alliance()
 
-
     def _add_heros(self, team):
         prev_tas = self.alliances.copy()
         self.alliances.pool |= team
         return prev_tas
 
-    def _add(self, alliance: Alliance, levels: Union[Iterator[int], Iterable[int]]) -> None:
+    def _add(
+        self, alliance: Alliance, levels: Union[Iterator[int], Iterable[int]]
+    ) -> None:
         team: Set[Hero] = self.alliances.pool
         t_size = 0
         if alliance not in self.alliances:
@@ -356,7 +361,9 @@ class Team:
                     size += amount
                     break
         if size > self.limit:
-            raise ValueError(f'Adding {alliance.name} requires too many heroes {size}, even though {", ".join(h.name for h in team)} overlap')
+            raise ValueError(
+                f'Adding {alliance.name} requires too many heroes {size}, even though {", ".join(h.name for h in team)} overlap'
+            )
         prev_tas = self.alliances.copy()
         self.alliances.mixed |= team
         self.size = size
@@ -364,7 +371,9 @@ class Team:
         if self.alliances.size > self.limit:
             size = self.alliances.size
             self.alliances = prev_tas
-            raise ValueError(f'Adding {alliance.name} requires too many heroes {size}, even though {", ".join(h.name for h in team)} overlap')
+            raise ValueError(
+                f'Adding {alliance.name} requires too many heroes {size}, even though {", ".join(h.name for h in team)} overlap'
+            )
         self._post_check(prev_tas)
         self._post_add()
 
@@ -379,9 +388,7 @@ class Team:
     def _add_hero(self, hero: Hero):
         if (
             not any(
-                hero in ta.a_heroes
-                for ta in self.alliances.values()
-                if ta.a_size > 0
+                hero in ta.a_heroes for ta in self.alliances.values() if ta.a_size > 0
             )
             and self.alliances.size + 1 > self.limit
         ):
@@ -397,10 +404,7 @@ class Team:
         return self
 
     def _increase(
-        self,
-        alliances: List[Alliance],
-        *,
-        fn: Callable[[Team, Alliance], Team],
+        self, alliances: List[Alliance], *, fn: Callable[[Team, Alliance], Team],
     ) -> Iterator[Team]:
         for alliance in alliances:
             try:
@@ -412,27 +416,18 @@ class Team:
                     yield value
 
     def increase(
-        self,
-        alliances: List[Alliance],
-        *,
-        fn: Callable[[Team, Alliance], Team],
+        self, alliances: List[Alliance], *, fn: Callable[[Team, Alliance], Team],
     ) -> Iterator[Team]:
         return iter_or(self._increase(alliances, fn=fn), self)
 
     def _recursive_increase(
-        self,
-        alliances: List[Alliance],
-        *,
-        fn: Callable[[Team, Alliance], Team],
+        self, alliances: List[Alliance], *, fn: Callable[[Team, Alliance], Team],
     ) -> Iterator[Team]:
         for team in self._increase(alliances, fn=fn):
             yield from team.recursive_increase(alliances, fn=fn)
 
     def recursive_increase(
-        self,
-        alliances: List[Alliance],
-        *,
-        fn: Callable[[Team, Alliance], Team],
+        self, alliances: List[Alliance], *, fn: Callable[[Team, Alliance], Team],
     ) -> Iterator[Team]:
         return iter_or(self._recursive_increase(alliances, fn=fn), self)
 
@@ -441,21 +436,17 @@ class GlobalTeam(Team):
     def __init__(self, alliances: List[Alliance], limit=10) -> None:
         super().__init__(limit=limit)
         self._alliances = alliances
-    
+
     def _copy(self) -> GlobalTeam:
         return type(self)(self._alliances, limit=self.limit)
 
     def increase(
-        self,
-        alliances: Any = None,
-        fn: Callable[[Team, Alliance], Team] = team_max,
+        self, alliances: Any = None, fn: Callable[[Team, Alliance], Team] = team_max,
     ) -> Iterator[Team]:
         return iter_or(self._increase(self._alliances, fn=fn), self)
 
     def recursive_increase(
-        self,
-        alliances: Any = None,
-        fn: Callable[[Team, Alliance], Team] = team_max,
+        self, alliances: Any = None, fn: Callable[[Team, Alliance], Team] = team_max,
     ) -> Iterator[Team]:
         return iter_or(self._recursive_increase(self._alliances, fn=fn), self)
 
@@ -479,11 +470,11 @@ class Underlord:
 
 
 def load(jailbirds: Set[str]) -> Tuple[List[Hero], List[Alliance]]:
-    with open('underlord.json') as f:
+    with open("underlord.json") as f:
         data = json.load(f)
-    
-    heroes = Hero.schema().load(data['heroes'], many=True)
-    alliances = Alliance.schema().load(data['alliances'], many=True)
+
+    heroes = Hero.schema().load(data["heroes"], many=True)
+    alliances = Alliance.schema().load(data["alliances"], many=True)
     alliance = {a.name: a for a in alliances}
     jailbirds = {j.lower() for j in jailbirds}
     for hero in heroes:
@@ -496,7 +487,7 @@ def load(jailbirds: Set[str]) -> Tuple[List[Hero], List[Alliance]]:
             if hero.ace:
                 hero.ace = alliance[hero.ace]
         except Exception as e:
-            raise ValueError(f'Error loading {hero.name}') from e
+            raise ValueError(f"Error loading {hero.name}") from e
     return heroes, alliances
 
 
@@ -508,22 +499,18 @@ def team_sort(team: Team) -> Tuple[float, int]:
 def short_str(team: Team) -> str:
     al = team.alliances
     return (
-        f'Team({team.size},{al.size}):\n'
-        f'  Team({len(al.team)}): {_str_heroes(al.team)}\n'
-        f'  Mixed({len(al.mixed)}): {_str_heroes(al.mixed)}\n'
-        + '  '.join(
-            f'  {ta.alliance.name} {ta.level}'
-            for ta in al.values()
-        )
+        f"Team({team.size},{al.size}):\n"
+        f"  Team({len(al.team)}): {_str_heroes(al.team)}\n"
+        f"  Mixed({len(al.mixed)}): {_str_heroes(al.mixed)}\n"
+        + "  ".join(f"  {ta.alliance.name} {ta.level}" for ta in al.values())
     )
 
 
 class UnderlordShell(cmd.Cmd):
     intro = (
-        'Welcome to the Underlord team picker.\n'
-        'Type help or ? to list commands.\n'
+        "Welcome to the Underlord team picker.\n" "Type help or ? to list commands.\n"
     )
-    prompt = '> '
+    prompt = "> "
 
     def __init__(self, heroes: List[Hero], alliances: List[Alliance]) -> None:
         super().__init__()
@@ -534,19 +521,19 @@ class UnderlordShell(cmd.Cmd):
         self.team = None
 
     def do_info(self, arg):
-        if arg.startswith('alliance ') or arg.startswith('a '):
+        if arg.startswith("alliance ") or arg.startswith("a "):
             _, alliance = arg.split(maxsplit=1)
             try:
                 print(self.alliance[alliance])
             except KeyError:
-                print(f'Invalid alliance {alliance}')
+                print(f"Invalid alliance {alliance}")
                 return
-        elif arg.startswith('hero ') or arg.startswith('h '):
+        elif arg.startswith("hero ") or arg.startswith("h "):
             _, hero = arg.split(maxsplit=1)
             try:
                 print(self.hero[hero])
             except KeyError:
-                print(f'Invalid hero {hero}')
+                print(f"Invalid hero {hero}")
                 return
         else:
             team = self.team
@@ -557,15 +544,17 @@ class UnderlordShell(cmd.Cmd):
         if team is None:
             return
         ranks = collections.Counter(h.tier for h in team.alliances.team)
-        print(' '.join(str(ranks[i]) for i in range(1, 6)))
+        print(" ".join(str(ranks[i]) for i in range(1, 6)))
         al = list(team.alliances)
         tier = 0
         for hero in sorted(team.alliances.team, key=hero_sort):
             if hero.tier > tier:
                 tier = hero.tier
-                print(f'{tier}:')
-            al_index = min(al.index(a) if a in al else len(al) for a in hero.alliances) + 1
-            print(f'  {al_index} {hero.name}')
+                print(f"{tier}:")
+            al_index = (
+                min(al.index(a) if a in al else len(al) for a in hero.alliances) + 1
+            )
+            print(f"  {al_index} {hero.name}")
 
     def do_alliance(self, arg):
         if arg:
@@ -573,22 +562,22 @@ class UnderlordShell(cmd.Cmd):
             try:
                 alliance = self.alliance[alliance]
             except KeyError:
-                print(f'Invalid alliance {alliance}')
+                print(f"Invalid alliance {alliance}")
                 return
             if level is None:
                 team_inc(self.team, alliance)
             elif self.team is None:
-                print('No team initialized')
+                print("No team initialized")
             else:
                 self.team.add(alliance, int(level))
             return
-    
+
         if self.team is None:
             return
 
         teams = list(sorted(self.team.increase(fn=team_inc), key=team_sort))
-        print('\n\n'.join(short_str(team) for team in teams))
-        print('\n' + short_str(self.team))
+        print("\n\n".join(short_str(team) for team in teams))
+        print("\n" + short_str(self.team))
 
     def do_new(self, arg):
         self.team = GlobalTeam(self.alliances)
@@ -598,23 +587,25 @@ class UnderlordShell(cmd.Cmd):
 
 
 def main():
-    heroes, alliances = load({
-        'Batrider',
-        'Weaver',
-        'Dazzle',
-        'Slardar',
-        'Shadow Demon',
-        'Enigma',
-        'Terrorblade',
-        'Omniknight',
-        'Necrophos',
-        'Sand King',
-    })
+    heroes, alliances = load(
+        {
+            "Batrider",
+            "Weaver",
+            "Dazzle",
+            "Slardar",
+            "Shadow Demon",
+            "Enigma",
+            "Terrorblade",
+            "Omniknight",
+            "Necrophos",
+            "Sand King",
+        }
+    )
     try:
         UnderlordShell(heroes, alliances).cmdloop()
     except KeyboardInterrupt:
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

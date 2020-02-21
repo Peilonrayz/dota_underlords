@@ -1,4 +1,4 @@
-dota_underlords
+DotA Underlords
 ===============
 
 .. image:: https://travis-ci.com/Peilonrayz/dota_underlords.svg?branch=master
@@ -8,7 +8,7 @@ dota_underlords
 About
 -----
 
-This is a skeleton project to have a standardized and concrete base for all projects.
+Easily build DotA Underlords teams.
 
 Installation
 ------------
@@ -37,4 +37,4 @@ To run all tests run ``nox``. No venv is needed; nox makes all of them for us.
 License
 -------
 
-dota_underlords is available under the MIT license.
+Dota Underlords is available under the MIT license.
